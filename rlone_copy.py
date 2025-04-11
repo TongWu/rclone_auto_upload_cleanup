@@ -210,12 +210,12 @@ def is_folder_uploaded(local_folder, remote_folder):
 def main():
     config = load_config()
     mapping_rules = load_mapping_rules(config)
-    folders = scan_folders_by_mapping(config)
-    max_upload_size = config["upload_size_gb"]
-    selected_folders = select_folders_for_upload(folders, max_upload_size)
     if len(sys.argv) > 1 and sys.argv[1] == "--cleanup":
         cleanup_old_uploads(config)
     else:
+        folders = scan_folders_by_mapping(config)
+        max_upload_size = config["upload_size_gb"]
+        selected_folders = select_folders_for_upload(folders, max_upload_size)
         upload_folders(selected_folders, config)
     print("Script execution completed.")
 
